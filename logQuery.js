@@ -1,19 +1,19 @@
 var Airtable = require('airtable');
-var base = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base(process.env.AIRTABLE_LOG);
+var base = new Airtable({apiKey: 'keyMj8bOmPNfNlgVL'}).base('app1ebcQY1S6i2Y2Y');
 var logger = function (request){
-  var data = {  
+  var data = {
   "email": request.query.email,
   "isbn": request.query.isbn,
   "zipcode": request.query.zipcode
   }
   base('simpleLog').create(data, function(err, record) {
-    if (err) { 
+    if (err) {
       console.error(err)
     }
     else {
-      return record 
+      return record
     }
-    
+
   });
 }
 module.exports = logger

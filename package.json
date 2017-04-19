@@ -2,7 +2,7 @@
   "//1": "describes your app and its dependencies",
   "//2": "https://docs.npmjs.com/files/package.json",
   "//3": "updating this file will download and update your packages",
-  "name": "my-hyperdev-app",
+  "name": "birdybook",
   "version": "0.0.1",
   "description": "What am I about?",
   "main": "server.js",
@@ -16,9 +16,7 @@
     "request": "^2.79.0",
     "airtable": "^0.4.3",
     "node-emoji": "^1.5.1",
-    "algoliasearch": "^3.22.1",
-    "react-native-barcode-scanner-universal": "^1.0.5",
-    "qr-code-scanner":"^1.0.5"
+    "algoliasearch": "^3.22.1"
   },
   "engines": {
     "node": "4.4.5"
@@ -32,5 +30,6 @@
     "hyperdev",
     "express"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "author": "johncgilmore"
 }

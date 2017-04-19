@@ -1,8 +1,8 @@
 var Airtable = require('airtable');
-var base = new Airtable({apiKey: process.env.AIRTABLE_KEY}).base(process.env.AIRTABLE_LOG);
-var subjectsAndPublishers = function (book){ 
+var base = new Airtable({apiKey: 'keyMj8bOmPNfNlgVL'}).base('app1ebcQY1S6i2Y2Y');
+var subjectsAndPublishers = function (book){
   var subjects = JSON.stringify(book.volumeInfo.categories);
-  var data = {  
+  var data = {
  "isbn": book.volumeInfo.industryIdentifiers[1].identifier,
   "publishedDate": book.volumeInfo.publishedDate,
   "publisher": book.volumeInfo.publisher,

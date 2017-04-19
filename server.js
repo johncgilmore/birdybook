@@ -1,7 +1,6 @@
 var express = require('express');
-var uniDomain = require('node-university-domains')
 var algolia = require ('algoliasearch')
-var searchPso = require ('./search/pso');
+var searchPso = require ('./pso');
 var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
@@ -24,8 +23,8 @@ app.get("/", function(req, res) {
       landing: true,
       delivery: delivery
     })
-  
-})  
+
+})
 app.get("/research", function (req, res){
   var research = []
   console.log("request (P) to /research")
@@ -59,17 +58,17 @@ app.get("/books", function(req, res, next) {
     'referer': 'gomix.com'
   }
 };   //TODO:
-  /* Figure out if a nested callback as I've done here is a terrible or a good idea 
+  /* Figure out if a nested callback as I've done here is a terrible or a good idea
   * This anonymous callback includes a nested request(options, callback) and a second callback function;
   * Top level callback returns google api's 'id' as var id for the book search, then alters the options;
-  * the second request uses altered options to call the api for that book id, and passes a callback that 
+  * the second request uses altered options to call the api for that book id, and passes a callback that
   * receives the book info (Publisher, subject) that will help me find the revevant contact rep
- */  
+ */
   // anonymous callback function:
   function callback(error, res, body) {
     var body = JSON.parse(body)
     var first = body.items[0];
-    var id = first.id    
+    var id = first.id
     console.log("first callback is executing; Google says the id for isbn " + req.query.isbn + " is " + id)
     options.url = 'https://www.googleapis.com/books/v1/volumes/' + id + '?key=' + process.env.GOOGLE_KEY,
     // nested request for google books api to call me again maybe, this time with all the data
@@ -77,12 +76,12 @@ app.get("/books", function(req, res, next) {
     // nested callback:
     function callback(error, res, body) {
       req.book = JSON.parse(body);
-      console.log("nested callback from google api in progress; google says the book is published by " + req.book.volumeInfo.publisher);   
+      console.log("nested callback from google api in progress; google says the book is published by " + req.book.volumeInfo.publisher);
       listSchools(req, res);
-    } 
-  } 
+    }
+  }
   // top level request for google api to call me maybe with book Id;
-  request(options, callback); 
+  request(options, callback);
   // then we should pass it to a middleware depending on which publisher it goes to. this is for pearson:
   }
     listSchools(req, res);
@@ -101,7 +100,7 @@ app.get("/check", function(req, response){
       console.log(error)
     var body = JSON.parse(body)
     if (body.items){
-    var id = body.items[0].id    
+    var id = body.items[0].id
     console.log("checking google for isbn " + req.query.isbn + " and the id is " + id)
     options.url = 'https://www.googleapis.com/books/v1/volumes/' + id, // + '?key=' + process.env.GOOGLE_KEY
     // nested request for google books api to call me again maybe, this time with all the data
@@ -109,7 +108,7 @@ app.get("/check", function(req, response){
     // nested callback:
     function callback(error, res, body) {
       req.book = JSON.parse(body);
-      console.log("nested callback from google api in progress; google says the book is published by " + req.book.volumeInfo.publisher); 
+      console.log("nested callback from google api in progress; google says the book is published by " + req.book.volumeInfo.publisher);
 
       delivery.query = req.book.volumeInfo
       delivery.isbn = delivery.query.industryIdentifiers[1].identifier
@@ -120,18 +119,18 @@ app.get("/check", function(req, response){
         searchPso('', 'attributes.id', 'PGM328461')
 
        // do something
-        
+
       }
       response.send({delivery: delivery, landing: false});
-    } 
+    }
       } else {
         console.log(body)
         response.sendStatus(200)
       }
-    
-  } 
+
+  }
     // top level request for google api to call me maybe with book Id;
-    request(options, callback); 
+    request(options, callback);
   }
 });
 var delivery = {
@@ -153,14 +152,14 @@ var listSchools = function(req, res) {
   console.log("querying a " + delivery.query.publisher + " endpoint to find school list by zipcode") // actually still querrying pearson
   req.institutions = [];
   var psoEndpoint = process.env.SCHOOLS_BY_ZIPCODE + req.query.zipcode.substring(0,3);
-  request(psoEndpoint, function(err, response, body) {  
+  request(psoEndpoint, function(err, response, body) {
     if (!err && response.statusCode == 200) {
       delivery.schools = JSON.parse(body).institutions
       for (var i = 0; i < JSON.parse(body).institutions.length; i++) {
-        // attach the list of institutions by zipcode to the req object 
-        
+        // attach the list of institutions by zipcode to the req object
+
         req.institutions.push(JSON.parse(body).institutions[i]);
-      } 
+      }
       // and order those institutions such that the ones the profs are most likely to be from are at top.
       req.institutions.sort(function(a, b) {
         var textA = a.id.substring(3, 7).toUpperCase();
@@ -180,10 +179,10 @@ var listSchools = function(req, res) {
         isbn: delivery.isbn,
         institutions: req.institutions,
       landing: false,
-      });    
+      });
   });
-  
-  
+
+
 }
 // ToDo: Don't call this same thing twice like I'm doing right now; note how the console logging happens twice; in the second instance, it renders the demo note.
 app.get("/ids/:institutionId/isbns/:isbn/school/:school", function(req, res) {
@@ -214,13 +213,13 @@ app.get("/ids/:institutionId/isbns/:isbn/school/:school", function(req, res) {
       userRequest: req.query.request,
       userName: data.name
       })
-    } 
+    }
     else {
       console.log(data)
       res.render('index', {
         contactInfo: data.contactInfo,
         session: req.params,
-      });  
+      });
     }
   });
 });
@@ -232,6 +231,6 @@ app.post('/note', function(request, response) {
 
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
+var listener = app.listen(8080, function() {
     console.log('Your app is listening on port ' + listener.address().port);
 })
