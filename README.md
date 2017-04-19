@@ -1,1 +1,4 @@
- see readme at the [dev site](https://glitch.com/edit/#!/birdybook-dev)
+Connects faculty seeking content for class to the appropriate reps.
+
+My first effort at building something.
+johncgilmore@gmail.com
