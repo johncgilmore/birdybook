@@ -9,8 +9,7 @@ var logQueries = require('./logQuery')
 var logSchools = require ('./logSchoolsByZip');
 var logSubjects = require ('./logSubjectsAndPublishers');
 var pug = require('pug');
-
-
+//var config = require('./config/config')  // not sure this is necessary 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true

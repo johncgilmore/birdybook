@@ -1,5 +1,6 @@
 var Airtable = require('airtable');
-var base = new Airtable({apiKey: 'keyMj8bOmPNfNlgVL'}).base('app1ebcQY1S6i2Y2Y');
+var config = require('./config/config')
+var base = new Airtable({apiKey: config.AIRTABLE_KEY}).base('app1ebcQY1S6i2Y2Y');
 var subjectsAndPublishers = function (book){
   var subjects = JSON.stringify(book.volumeInfo.categories);
   var data = {
@@ -15,6 +16,7 @@ var subjectsAndPublishers = function (book){
   }
   base('subPubs').create(data, function(err, record) {
     if (err) { console.error(err); return; }
+    console.log(record)
     console.log(record);
 });
 }

@@ -1,6 +1,7 @@
 // this is just grabbing pearson data so I can eventually stop calling their database to find the arrangement of schools nationwide by zipcode.
 var Airtable = require('airtable');
-var base = new Airtable({apiKey: 'keyMj8bOmPNfNlgVL'}).base('app1ebcQY1S6i2Y2Y');
+var config = require('./config/config')
+var base = new Airtable({apiKey: config.AIRTABLE_KEY}).base('app1ebcQY1S6i2Y2Y');
 var schoolsByZip = function (req){
   var data = {
     "zipcode": req.query.zipcode,
@@ -12,6 +13,7 @@ var schoolsByZip = function (req){
       console.error(err)
     }
     else {
+      console.log(record)
       return record
     }
   });
