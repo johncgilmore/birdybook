@@ -9,7 +9,7 @@ var logQueries = require('./logQuery')
 var logSchools = require ('./logSchoolsByZip');
 var logSubjects = require ('./logSubjectsAndPublishers');
 var pug = require('pug');
-console.log(process.env)
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
