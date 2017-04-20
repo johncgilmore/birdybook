@@ -152,9 +152,9 @@ var schoolsByPub = function(publisher){
 var listSchools = function(req, res) {
 
   //TODO: Scrape all zipcode and school data to my own database in case it disappears from pearson.
-  console.log("querying a " + delivery.query.publisher + " endpoint to find school list by zipcode") // actually still querrying pearson
+  console.log("querying a " + delivery.query.publisher + " endpoint to find school list by zipcode") // actually still querrying pearson this is a forward looking statement lol
   req.institutions = [];
-  var psoEndpoint = process.env.SCHOOLS_BY_ZIPCODE + req.query.zipcode.substring(0,3);
+  var psoEndpoint = 'https://instructors.pearsonhighered.com/api/institutions?country=US&postCode=' + req.query.zipcode.substring(0,3);
   request(psoEndpoint, function(err, response, body) {
     if (!err && response.statusCode == 200) {
       delivery.schools = JSON.parse(body).institutions
@@ -174,7 +174,7 @@ var listSchools = function(req, res) {
     }
     else {
       console.log(err +" (this error means that the call to pearson's schools by zipcode api failed)");
-      res.render('index', {title: "error", message: "the call to pearson failed; check console output"});
+
     }
     res.render('index', {
         //book: req.book.volumeInfo,
