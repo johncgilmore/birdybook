@@ -6,18 +6,21 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var emoji = require('node-emoji');
 var logQueries = require('./logQuery')
-var logSchools = require ('./logSchoolsByZip')
+var logSchools = require ('./logSchoolsByZip');
 var logSubjects = require ('./logSubjectsAndPublishers');
+var pug = require('pug');
+console.log(process.env)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
-})); // for parsing application/x-www-form-urlencoded
+}));
 app.use(express.static('public'));
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.get("/", function(req, res) {
         console.log("GO!")
+
     res.render('index', {
       isbn: false,
       landing: true,
@@ -171,7 +174,7 @@ var listSchools = function(req, res) {
     }
     else {
       console.log(err +" (this error means that the call to pearson's schools by zipcode api failed)");
-      res.render(404);
+      res.render('index', {title: "error", message: "the call to pearson failed; check console output"});
     }
     res.render('index', {
         //book: req.book.volumeInfo,

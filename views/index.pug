@@ -10,27 +10,27 @@ head
   // End of Async Drift Code
   - var d = delivery;
 main
-  header 
+  header
    if landing
     div.hidden.video(height="undefined" width="undefined" style="margin: 5rem auto 0 auto")
      h2.hidden.video#header <span class="purple">play this silent video<span> for a 30 second walkthrough
      iframe.hidden.video(height="800px" width="600px" src="https://www.useloom.com/embed/008f9899ee3d4ea3ba769dd70f0827e4" frameborder="0" allowfullscreen)
-    //img(src='https://cdn.glitch.com/258c47d2-09d8-4d75-81f2-3973c2223855%2Fheadline-two-lines-purple.png?1490680584110') 
-    h1.center#headline #{d.headline} 
+    //img(src='https://cdn.glitch.com/258c47d2-09d8-4d75-81f2-3973c2223855%2Fheadline-two-lines-purple.png?1490680584110')
+    h1.center#headline #{d.headline}
   body
      if notReady && contactInfo.firstName != "USR"
          a(href="/")
-          button Start Over 
-     else  
-      if !institutions 
+          button Start Over
+     else
+      if !institutions
        // .pad.land-up#primary
           //h3 <span class="white"> Enter an isbn </span>
      if (!contactInfo)
-       if !isbn 
+       if !isbn
           .wire
            if example
-            h3 <span class="white">Looks like you didn't submit an isbn or zipcode. We've generated results as an example. Continue on to see how this works and then you can try it with real info.</span>. 
-           form(method='GET' action='/books' align='left')   
+            h3 <span class="white">Looks like you didn't submit an isbn or zipcode. We've generated results as an example. Continue on to see how this works and then you can try it with real info.</span>.
+           form(method='GET' action='/books' align='left')
              input.float-left#isbn(type='tel', align="left", name='isbn', maxlength='17', placeholder='enter an isbn')
              input.float-left#zipcode(type='Tel',  align="right", name='zipcode', placeholder='your zipcode')
              img.float-left.book-cover()
@@ -38,24 +38,24 @@ main
              button.find.button-small#submit(type='submit') Find Resources
            a(href='/books?isbn=9780393937510&zipcode=11245')
             button.find.hidden.button-small#example [example]
-          h3.center.second.switch.hidden <a href="https://glitch.com/edit/#!/birdybook-dev">Birdybook</a> helps faculty save brain for the <span id="emojis">🚀👩🏾‍🔬</span>. 
+          h3.center.second.switch.hidden <a href="https://glitch.com/edit/#!/birdybook-dev">Birdybook</a> helps faculty save brain for the <span id="emojis">🚀👩🏾‍🔬</span>.
        if institutions && !alert
           h1.center#headline <span class="purple">Where</span> do you teach?
            .pad.primary.land-up.add-bottom
-            for school in institutions 
+            for school in institutions
              a.institution(data-id=school.id href='/ids/' + school.id + '/isbns/' + isbn + '/school/' + school.name )
               button.list= school.name
      else
       if (!notReady)
        if contactInfo
-       form 
+       form
         if contactInfo.firstName != "USR"
          h1#headline Let's contact <span class="purple"> #{contactInfo.firstName} #{contactInfo.lastName}</span>,
          h3 who covers #{contactInfo.disciplineName} at #{session.school}:
          .pad.primary.add-bottom
           form
             img.book-cover(src="http://pictures.abebooks.com/isbn/" + session.isbn + "-us.jpg" display="inline" align="right")
-            p.salutation Hi #{contactInfo.firstName}, 
+            p.salutation Hi #{contactInfo.firstName},
             p.priorNeeds I need <span class="needs"></span><span class="hidden"> for isbn <a target="_blank" href='https://www.pearsonhighered.com/product/isbn-13-redirect/#{session.isbn}.html'>#{session.isbn}</a>. Can you please reply to this email with a tracking number for anything shipped? That way I'll know when precisely to expect it. </span>
             button#desk-copy.resources.greyed.buttons(value= "a desk copy") a free instructor copy
 
@@ -69,12 +69,12 @@ main
             button.hidden-forever.repEmail #{contactInfo.contactEmail}
        if contactInfo.firstName == "USR"
         p= "There isn't a designated rep for this title at your institution, but send an email to " + contactInfo.contactEmail + ", the designated catch-all email for " + isbn + "."
-        p= "You can copy and paste this paragraph:"  
+        p= "You can copy and paste this paragraph:"
         p= "Hi there,"
-        p= "I need" 
+        p= "I need"
         input#quantity(type="text", display="inline", name='request' placeholder="a desk copy of ", max-width="5%")
         p= "isbn " + isbn + "."
-        p Thanks, 
+        p Thanks,
          input#name(type="text", name='firstName', placeholder='your first name')
          input#name(type="text", name='lastName', placeholder='your last name')
          input#email(type='email', name='email', placeholder='your .edu email')
@@ -82,7 +82,7 @@ main
          button(type="reset") reset
   if notReady && contactInfo.firstName != "USR"
    .box
-    
+
     textarea.copyThis(cols="30" rows="10" name="lol")= "Hi " + contactInfo.firstName + ", I need " + "a desk copy of" + " isbn " + isbn + ".\n" + "Thanks."
     button.clipboard.clip Copy to Clipboard
    p= "email your request to "+ contactInfo.contactEmail
@@ -90,9 +90,9 @@ main
 footer
  if !landing
   a(href='/')
-    button.footer.white-button  start over  
+    button.footer.white-button  start over
  a
   button#demo.footer.white-button demo
-  
+
 script(src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous")
 script(src="/client.js")
