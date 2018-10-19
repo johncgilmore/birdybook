@@ -13,16 +13,29 @@ header {
   margin:0 10px 0 10px;
   border-radius:3px;
   display: inline;
+  height: 5rem;
+background: url(https://cdn.hyperdev.com/us-east-1%3A504f3f48-4190-4ed1-ac39-6e74e458cb58%2Fbirdy2.png?1474684704779);
+  
 
 }
-
+.header img {
+  margin-top: 0rem;
+   float: left;
+  width: 30%;
+}
+.header h1 {
+  position: relative;
+}
+ 
+ 
 body {
   color:#222;
   font-family:  arial, sans-serif;
   background-color: #eeffff;
   border-radius:3px;
-  
+  max-width: 68%;
 }
+  
 footer{
   color:#222;
   font-family: arial, sans-serif;
@@ -30,10 +43,9 @@ footer{
   
 }
 
-main {
+.main {
   margin: 0 auto 0 auto;
-    max-width: 50rem;
-    overflow: auto;
+  overflow: auto;
 
 }
 
@@ -74,7 +86,7 @@ main {
 
 h1 {
   font-weight:bold;
-  font-size:4.5rem;
+  font-size:3.5rem;
   background:"transparent";
   padding-top:3rem;
 }
@@ -83,11 +95,10 @@ h2 {
   font-weight:bold;
   font-size:3.3rem;
   padding: .2rem .3rem .2rem .7rem;
-  text-align: center;
+ margin: 5px auto auto 5px;
 }
-
 h3  {
-  font-size:1.7rem;
+  font-size:1.8rem;
   font-weight: 100;
   padding: .2rem .3rem .2rem .7rem;
   margin: 5px auto auto 5px;
@@ -127,64 +138,46 @@ label {
     color:#88a7ac;
 }
 
-img {
-  width: 100%
-}
+
 
 
 
 .book-cover {
-  width: 25%;
+  
   margin:5px;
   border-radius:10px;
   border: white 3px solid;
+  display:inline-block;
+  max-width: 150px;
 }
 
 a {
-  color:#ad3888;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
-  color:blue;
-}
-a:visited {
-   text-decoration: underline;
-  color:blue;
+  text-decoration: bold;
 }
 
 
 p {
   margin-left: 1rem;
-  line-height: 2rem;
-  font-size: 1.6rem;  
+  line-height: 1.5rem;
+  font-size: 1.3rem;  
 }
 
-
-
-a {
-  color: #3652d3;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: none;
-
-}
 
 
 button, input {
   font-size:2rem;
   padding:5px 0 5px 5px;
-  font-size:2rem;
   border-radius:3px;
 }
 
 input {
 
   border:solid #666 1px;
-  margin:.7rem 0px 0px .5rem ;
+  margin:.7rem 0px 0px .3rem ;
  
 }
 
@@ -194,24 +187,26 @@ input:focus {
 }
 
 textarea {
-  width:90%;
-  height:60%;
-  border:solid #ffeeee 2px;
+  border:solid #555 2px;
   border-radius: 6px;
+  padding: 10px;
   margin: 5px auto 5px auto;
-  display:block;
-  
+  width: 60%;
+  height: 200px;
+  display: inline-block;
+  align: right;
+  font-size:18px;
 }
 
 button {
-  line-height: 33px;
+  line-height: 23px;
   color:white;
   background-color:#555;
   border: #444 solid 1px;
   box-shadow: 1px 1px 0 #444;
   padding:3px 10px 3px 10px;
   cursor: pointer;
-  margin:.7rem 0px 10px .5rem ;
+  margin:.7rem .5rem 10px .5rem ;
   
 }
 
@@ -241,7 +236,7 @@ button:active {
   font-size:1rem;
   border-radius:6px;
   min-width: none;
-  display:inline;
+  display:inline-block;
   float:left;
 }
 
@@ -251,16 +246,23 @@ button:active {
   
 }
 .extra-space {
-  display:block; 
+  display:inline-block; 
   padding-bottom:10px;
 }
 .footer {
-  position: fixex;
+  position: fixed;
   right: 0;
-  bottom: 0px;
-  left: 0;
-  padding: 1rem;
+  bottom:90%;
+  left: 70%;
+  padding: 0;
   text-align: center;
+}
+
+.book-card {
+  position: fixed;
+  bottom: 60%;
+  left:70%;
+  padding: 0
 }
 .foot {
   margin: 20% 0 0 0;
@@ -273,30 +275,21 @@ button:active {
 }
 
 .box {
-  width: 80%;
+  
   background:#fff; 
   border: solid #ad88e6 3px; 
   border-shadow: box; 
   border-radius: 6px;
-   margin: 0 6px 0 0px;
-}
-
-.small {
- padding: 0px;
-min-width: 0px;
-  
+  margin: 10px 6px 0 0px;
 }
 
 .purple {
-  color: #bb2299
-}
+  color: #bb2299;
+  background-color:lightblue}
 
-.center {
-  text-align: center
-}
 
 #headline {
-  width: 80%;
+  
   opacity: 0;
   display: block;
   margin: 0 auto 0 auto;
@@ -318,7 +311,7 @@ min-width: 0px;
 }
 
 .hidden, .hidden-forever {
-  display: none;
+  visibility:hidden;
 }
 
 .blue {
@@ -326,9 +319,15 @@ min-width: 0px;
   color: blue;
 }
 
-textarea {
-  width: 300px;
-  height: 150px;
-  display: inline;
-  align: right;
+.header, .body {
+  
+  width: 80%;
+  
+  background: none;
+  
+}
+
+.large-button {
+  line-height: 50px;
+  padding: 20px;
 }
