@@ -1,0 +1,63 @@
+doctype html
+head
+  title birdybook - Prof Helper
+  meta(name='description', content='Get desk copies and instructor resources for all publishers in one place')
+  link#favicon(rel='icon', href='https://cdn.hyperdev.com/us-east-1%3A8dbc049b-2a54-4c82-a7f3-8a4e2707d646%2Fbird_140_163.png', type='image/x-icon')
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  link(rel='stylesheet', href='/style.css')
+  script (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-101267126-1', 'auto'); ga('send', 'pageview')
+  script (type="text/javascript") window.MemberfulOptions = {site: "https://johngilmore.memberful.com"}; (function() {var s   = document.createElement('script');s.type  = 'text/javascript';s.async = true;s.src   = 'https://d35xxde4fgg0cx.cloudfront.net/assets/embedded.js';    setup = function() { window.MemberfulEmbedded.setup(); }    if(s.addEventListener) { s.addEventListener("load", setup, false); } else { s.attachEvent("onload", setup); }    ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );  })();)
+
+  - var d = delivery;
+
+.header
+  - if (!isbn){
+  - var cover = "https://cdn.glitch.com/258c47d2-09d8-4d75-81f2-3973c2223855%2Fbb.png?1509051723645" }
+  - else { cover = delivery.cover}
+  img.book-cover(src=" " + cover)
+  if !contactInfo
+    h2  <span class="purple">Request Desk Copies</span> 
+    h2 from Any Publisher 
+body
+     if !institutions && !isbn && !contactInfo
+      form#query(method='GET' action='/check' align='left')  
+       div(style="margin-top: 1rem")
+        label show an <a class="purple" href="" id="exampleIsbn">example</a>
+        input#isbn.isbn-input(type='text', align="left", name='isbn', placeholder='Enter isbn/author')
+        input#zipcode.zip-input(type='tel',  align="right", name='zipcode', maxlength='5' placeholder='your zipcode')
+        
+       //  button.find.button-small#submit(type='submit') Find Resources
+
+       
+         
+      h3(style="padding-top: 10rem") <a href="https://glitch.com/edit/#!/birdybook">Birdybook</a> helps faculty save brain for the <span id="emojis">🚀🔬</span>. 
+   
+ if contactInfo
+        if contactInfo.firstName !== "USR"
+         header
+           h2 Let's contact <span class="purple"> #{contactInfo.firstName} #{contactInfo.lastName}</span>,
+           p the #{delivery.volumeInfo.publisher} rep at <span class=".school-name">#{session.school}</span>.<span class="hide"> Select one or more from below, and we'll draft a message.</span>
+         body   
+          form
+              button#desk-copy.resources.buttons(value= "a desk copy") a free instructor copy
+              button.resources.buttons(value= "any relevant instructor resources") instructor resources
+              p.salutation.request.hidden Hi #{contactInfo.firstName},  I need <span class="needs"></span> for isbn <a target="_blank" href='https://www.google.com/search?q=#{delivery.isbn}+#{delivery.volumeInfo.publisher}'>#{delivery.isbn}</a>. Can you please reply to this email with a tracking number for anything shipped? That way I'll know when precisely to expect it.
+              input#email(type='email', name='email', placeholder='your .edu email')
+              input#firstName(type="text", name='firstName', placeholder='your first name')
+              input#lastName(type="text", name='lastName', placeholder='your last name')
+              button(type="submit").clip preview
+              //button(type="reset") reset
+              button(onclick="sendMail(); return false") Send
+              button.hidden-forever.repEmail #{contactInfo.contactEmail}
+              a(href="https://johngilmore.memberful.com/checkout?plan=24691") pay me money
+
+  footer
+
+   if isbn || contactInfo
+    a(href='/')
+      button  start over
+script(src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous")
+script(src="/client.js")
+//script(src="https://embed.small.chat/T0PR2CUS1G581D06R3.js" async)
