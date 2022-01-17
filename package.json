@@ -14,7 +14,7 @@
     "body-parser": "^1.15.2",
     "jade": "^1.11.0",
     "request": "^2.79.0",
-    "airtable": "^0.4.3",
+    "airtable": "^0.7.2",
     "node-emoji": "^1.5.1",
     "algoliasearch": "^3.22.1",
     "stripe": "^4.22.1",
